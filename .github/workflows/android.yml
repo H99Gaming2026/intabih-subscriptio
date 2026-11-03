@@ -18,6 +18,11 @@ jobs:
       - name: Extract project
         run: unzip -o intabih_android_v4_source-1.zip -d .
 
+      - name: Fix Nullable import
+        run: |
+          sed -i '/import androidx.annotation.Nullable;/d' app/src/main/java/com/intabih/subscription/MainActivity.java
+          sed -i 's/onCreate(@Nullable Bundle state)/onCreate(Bundle state)/' app/src/main/java/com/intabih/subscription/MainActivity.java
+
       - name: Setup Java
         uses: actions/setup-java@v4
         with:
